@@ -1,4 +1,4 @@
-"""
+*"""
 OpenBNF database access
 """
 from pymongo import Connection
