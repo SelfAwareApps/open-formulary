@@ -21,4 +21,9 @@ if 'MONGOHQ_URL' in os.environ:
 
 
 SECRET = 'QWERTYUIOPASDFGHJKLZXCVBNM'
-CAS_SERVER = 'http://localhost:8888'
+CAS_SERVER = 'http://auth.openhealthcare.org.uk'
+
+try:
+    from local_settings import *
+except:
+    pass
