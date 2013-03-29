@@ -1,12 +1,8 @@
-{% extends "base.html" %}
-{% block title %}Home{% endblock %}
-
-{% block content %}
 <ul class="nav nav-tabs">
-  <li class="active">
+  <li {% if active == 'home' %}class="active"{% endif %}>
     <a href="/">formularies</a>
   </li>
-  <li>
+  <li {% if active == 'create' %}class="active"{% endif %}>
     <a href="{{ url_for('views.create') }}">create</a>
   </li>
   <li>
@@ -18,9 +14,3 @@
     </a>
   </li>
 </ul>
-<div class="row-fluid">
-  {% for drug in drugs %}
-  <p>{{drug['code']}}, {{drug['name']}}</p>
-  {% endfor %}
-</div>
-{% endblock %}

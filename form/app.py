@@ -18,11 +18,3 @@ app.session_interface = MongoSessionInterface(db)
 app.register_blueprint(views.blue)
 app.register_blueprint(users.api)
 users.setup(app)
-
-# def include_file(name):
-#     return jinja2.Markup(loader.get_source(env, name)[0])
-
-# loader = jinja2.PackageLoader(__name__, 'templates')
-# env = jinja2.Environment(loader=loader)
-# env.globals['include_file'] = include_file
-# env.globals['url_for'] = url_for

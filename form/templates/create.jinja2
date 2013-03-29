@@ -1,0 +1,29 @@
+{% extends 'base.jinja2' %}
+{% block title %}New Formulary{% endblock %}
+
+{% block content %}
+  {% set active = 'create' %}
+  {% include 'tabs.jinja2' %}
+  {% for chapter in chapters %}
+    <div class="row-fluid">
+      <h3>{{ chapter['title'] }}</h3>
+      {% if chapter['drugs']|length > 0 %}
+        <div class="span6">
+          <h4>Available</h4>
+          <ul class="druglist">
+            {% for drug in chapter['drugs'] %}
+              <li id="{{ drug['code'] }}">
+                <input type="checkbox" name="" value="" />
+                {{ drug['name'] }} ( {{ drug['code'] }} )
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <div class="span5">
+          <h4>Selected</h4>
+        </div>
+      {% endif %}
+    </div>
+  {% endfor %}
+{% endblock %}

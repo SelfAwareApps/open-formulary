@@ -22,10 +22,24 @@ def load_drugs():
     """
     drugfile = DATA / 'drug.names.csv'
     db.drugs.drop()
+    chapters = dict([(c['chapter'], c) for c in db.struct.find({'level': 'chapter'})])
+    for c in chapters:
+        chapters[c]['drugs'] = []
+
     with drugfile.csv() as csv:
         for drug in csv:
+            code = drug[0]
             name = drug[1].replace('_', ' ')
-            db.drugs.save(dict(code=drug[0], name=name))
+            drugdict = dict(code=code, name=name)
+            db.drugs.save(drugdict)
+            try:
+                chapters[code[:2]]['drugs'].append(drugdict)
+            except KeyError:
+                print drug
+                pass
+
+    for chapter in chapters.values():
+        db.struct.save(chapter)
     return
 
 def load_structure():

@@ -1,0 +1,22 @@
+{% extends "base.jinja2" %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+  {% set active = 'home'b %}
+  {% include 'tabs.jinja2' %}
+
+<div class="row-fluid">
+  {% if formularies.count() > 0 %}
+    {% for form in formularies %}
+      <p>{{form}}</p>
+    {% endfor %}
+  {% else %}
+    <p>
+      Looks like you haven't created any formularies yet...
+    </p>
+    <p>
+      You should try <a href="{{ url_for('views.create') }}">creating one</a>
+    </p>
+  {% endif %}
+</div>
+{% endblock %}
