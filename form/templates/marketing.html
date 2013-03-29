@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Welcome!{% endblock %}
+
+{% block content %}
+<h2>
+  Create and distribute your own formularies
+</h2>
+<a href="/login">
+  Log in
+</a>
+<p>
+  {{ request }}
+</p>
+<p>{{request.user }}</p>
+{% endblock %}

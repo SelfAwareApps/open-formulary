@@ -1,0 +1,38 @@
+<!doctype html>
+<html class="{% block pageclass %}{%endblock %}">
+  <head>
+    <title>{% block title %}{% endblock %} | Open Formulary</title>
+    {% include 'head.html' %}
+
+    {% block extrascripts %}{% endblock %}
+
+  </head>
+  <body>
+
+    <div id="main-page">
+
+      <div id="header">
+        <h1>
+          <a href="/">Open Formulary</a>
+          <img src="/static/img/logo.png"/>
+        </h1>
+      </div><!-- /header -->
+
+      <div id="content">
+        <div class="container">
+          {% block content %}{% endblock %}
+        </div>
+      </div><!-- /content -->
+      <div id="footer">
+        {% block footer %}{% endblock %}
+        <p id="warning">
+          Brought to you by
+            <a href="/about">
+              Open Health Care UK
+            </a>
+        </p>
+      </div>
+
+    </div><!-- /page -->
+  </body>
+</html>

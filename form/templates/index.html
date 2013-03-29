@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<ul class="nav nav-tabs">
+  <li class="active">
+    <a href="/">formularies</a>
+  </li>
+  <li>
+    <a href="{{ url_for('views.create') }}">create</a>
+  </li>
+  <li>
+    <a href="{{ url_for('users.logout') }}">log out</a>
+  </li>
+  <li>
+    <a href="#">
+      {{ request.user.username }}
+    </a>
+  </li>
+</ul>
+<div class="row-fluid">
+  {% for drug in drugs %}
+  <p>{{drug['code']}}, {{drug['name']}}</p>
+  {% endfor %}
+</div>
+{% endblock %}
