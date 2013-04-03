@@ -22,7 +22,7 @@ def index():
 
     If we're logged in, show them their formularies.
     """
-    if request.user.is_anonymous:
+    if not request.user.is_authenticated:
         popular = Formulary.popular(4)
         return render_template('marketing.jinja2',
                                popular=popular)
