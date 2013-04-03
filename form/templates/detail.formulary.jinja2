@@ -1,0 +1,86 @@
+{% extends 'base.jinja2' %}
+
+{% block title %}{{ formulary['name'] }}{% endblock %}
+
+{% block content %}
+  {% include 'tabs.jinja2' %}
+  <div class="row-fluid">
+    <div class="span12">
+      <form method="POST" id="follow-form"
+            action="{{ url_for('views.formulary_follow',
+            formid=formulary['_id'].__str__()) }}">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}" />
+
+      <h1>
+        {{ formulary['name'] }}
+        {% if request.user.username == formulary['owner'] %}
+          <a href="{{ url_for('views.formulary_edit', formid=formid) }}">
+            <i class="icon-edit"></i>
+          </a>
+          <a href="{{ url_for('views.formulary_delete', formid=formid) }}">
+             <i class="icon-remove-sign red"></i>
+          </a>
+        {% else %}
+
+          <a  href="javascript:{}"
+              onclick="document.getElementById('follow-form').submit(); return false;">
+                <i class="icon-heart{% if not following %}-empty{% endif %} red tt"
+                   data-toggle="tooltip"
+                   {% if not following %} title="add to your formularies for quick access"
+                   {% else %} title="currently in your formularies. Click here to remove"
+                   {% endif %}
+                   ></i>
+</a>
+        {% endif %}
+      </h1>
+          </form>
+      <p>
+        Created by
+        <a href="{{ url_for('views.formulary_userlist', username=formulary['owner']) }}">
+          {{ formulary['owner'] }}
+        </a>
+      </p>
+      <p class="lead blue">
+        <i class="{% if formulary['public'] %}icon-unlock
+                  {% else %}icon-lock{% endif %}">
+        </i> |
+        <i class="icon-group"></i> {{ formulary['following_count'] or 0 }} following
+      </p>
+      <p class="hero-unit">
+        {{ formulary['description'] }}
+      </p>
+    </div>
+  </div>
+
+  {% for chapter in chapters %}
+    {% if chapter in formulary['codes']  %}
+      <h3>{{chapters[chapter]}}</h3>
+
+      {% for section in sections[chapter] %}
+        {% if section in formulary['codes'][chapter] %}
+          <div class="row-fluid">
+            <div class="span12">
+              <h4>
+                {{ sections[chapter][section] }}
+                ( {{ formulary['codes'][chapter][section]|length}} )</h4>
+              <table class="table table-striped table-bordered table-hover">
+                <tr>
+                  <th>BNF Code</th>
+                  <th>Name</th>
+                </tr>
+                {% for code in formulary['codes'][chapter][section] %}
+                  <tr>
+                    <td>{{ drugs[code]['code'] }}</td>
+                    <td>{{ drugs[code]['name'] }}</td>
+                  </tr>
+                {% endfor %}
+              </table>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+
+    {% endif %}
+  {% endfor %}
+
+{% endblock %}

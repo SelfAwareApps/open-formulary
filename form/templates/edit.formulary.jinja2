@@ -1,0 +1,57 @@
+{% extends 'base.jinja2' %}
+{% block title %}Edit {{ formulary['name'] }} {% endblock %}
+
+{% block extrascripts %}
+  <script type="text/javascript" src="/static/js/create.js"></script>
+{% endblock %}
+
+{% block content %}
+  {% include 'tabs.jinja2' %}
+
+  <form method="POST" id="edit-form" action="">
+    <fieldset>
+
+
+  {% include 'formulary.metadata.form.jinja2' %}
+
+  {% for paragraph in paras %}
+    {% if paragraph['drugs']|length > 0 %}
+      <div class="row-fluid">
+        <h3 class="drugsect">
+          <i class="icon-chevron-right"></i>
+          {{ paragraph['title'] }}
+        </h3>
+        <h4 class="red">
+          {{ chapters[paragraph['chapter']] }} -
+          {{ sections[paragraph['chapter']][paragraph['section']] }}
+        </h4>
+
+        <div class="span12 collapsed">
+          <ul class="unstyled">
+            {% for drug in paragraph['drugs'] %}
+              <li id="{{ drug['code'] }}">
+                <input type="checkbox" name="{{drug['code']}}" value=""
+                       {% if paragraph['chapter'] in formulary['codes'] and drug['code'] in formulary['codes'][paragraph['chapter']][paragraph['section']] %}checked="true"{% endif %}
+                       />
+                {{ drug['name'] }} ( {{ drug['code'] }} )
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    {% endif %}
+  {% endfor %}
+
+  <div class="row-fluid">
+    <div class="span12">
+      <p>All done? hit the save button below to see your formulary in action</p>
+      <button type="submit" class="btn" tabindex="4">Submit</button>
+    </div>
+  </div>
+
+    </fieldset>
+  </form>
+
+
+
+{% endblock %}

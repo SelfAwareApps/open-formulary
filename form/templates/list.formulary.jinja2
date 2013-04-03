@@ -1,0 +1,23 @@
+{% extends 'base.jinja2' %}
+{% block content %}
+  {% set active = 'list' %}
+  {% include 'tabs.jinja2' %}
+
+  <h2>{{ username }}</h2>
+  {% for formulary in popular %}
+    <div class="row-fluid">
+      <div class="span12">
+        <a href="{{ url_for('views.formulary_detail',
+                 formid=formulary['_id'].__str__()) }}">
+          <h4 class="blue">
+            {{ formulary['name'] }}
+            <i class="icon-group"></i> ( {{ formulary['following_count'] }} )
+          </h4>
+        </a>
+        <p>
+          {{ formulary['description'] }}
+        </p>
+      </div>
+    </div>
+  {% endfor %}
+{% endblock %}

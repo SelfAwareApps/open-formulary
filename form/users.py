@@ -1,10 +1,12 @@
 """
 Users for Open Formulary
 """
+import functools
 from urllib import urlencode
 
 from bson.objectid import ObjectId
-from flask import Blueprint, request, redirect, session, current_app, _request_ctx_stack
+from flask import (Blueprint, request, redirect, session, current_app,
+                   _request_ctx_stack, url_for)
 from lxml import etree
 import requests
 
@@ -126,6 +128,17 @@ class User(object):
             return True
         return False
 
+    def save(self):
+        """
+        Save the current User document
+
+        Return: Bool
+        Exceptions: None
+        """
+        db.users.save(self.document)
+        return True
+
+
 
 def login_user(user):
     """
@@ -173,6 +186,7 @@ def login():
     """
     cas_url = '{0}/login?service={1}'.format(settings.CAS_SERVER, request.url)
     ticket = request.args.get('ticket', None)
+    next_page = request.args.get('next_page', None)
     if ticket is None:
         return redirect(cas_url)
 
@@ -181,6 +195,8 @@ def login():
         return redirect(cas_url)
 
     login_succ = login_user(user)
+    if next_page:
+        return redirect(next_page)
     return redirect('/')
 
 @api.route('/logout')
@@ -196,6 +212,33 @@ def logout():
         cas_url = '{0}/logout?url=http://{1}'.format(settings.CAS_SERVER, request.host)
         return redirect(cas_url)
     return redirect('/')
+
+def login_required(fn):
+    """
+    Wrap a view FN such that the user must log in
+    before viewing it.
+
+    Arguments:
+    - `fn`: callable
+
+    Return: callable
+    Exceptions: None
+    """
+    @functools.wraps(fn)
+    def check_auth(*args, **kwargs):
+        """
+        Check to see whether the current user is logged in or not
+
+        Return: http response
+        Exceptions: None
+        """
+        if request.user.is_authenticated:
+            return fn(*args, **kwargs)
+        print 'redirecting in decorator'
+        return redirect(url_for('users.login', next_page=request.path))
+
+    return check_auth
+
 
 
 def setup(app):

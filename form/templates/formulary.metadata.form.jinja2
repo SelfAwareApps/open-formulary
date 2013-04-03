@@ -1,0 +1,28 @@
+      <div class="row-fluid">
+        <div class="span4 offset2">
+          <h3>
+            Formulary details
+          </h3>
+          {% if errors %}
+            {% for err in errors %}
+              <p class="text-error">{{ err }}</p>
+            {% endfor %}
+          {% endif %}
+
+          <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}" />
+          <label>Name</label>
+          <input type="text" name="name"
+                 tabindex="1"
+                 value="{% if 'name' in formdata %}{{ formdata['name'] }}{% endif %}"
+                 placeholder="Name of the formulary"/>
+          <label class="checkbox">
+            Would you like this formulary to be public?
+            <input type="checkbox"
+                   name="public"
+                   tabindex="2"
+                   checked="{% if 'public' in formdata %}{{ formdata['public'] }}{% endif %}" />
+          </label>
+          <label for="description">Description of this formulary</label>
+          <textarea name="description" id="" rows="" cols="" tabindex="3">{% if formdata['description'] %}{{ formdata['description'] }}{% endif %}</textarea>
+        </div>
+      </div>

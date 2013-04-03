@@ -20,6 +20,19 @@
 
       <div id="content">
         <div class="container">
+          {% with messages = get_flashed_messages() %}
+            {% if messages %}
+              <ul class="unstyled">
+                {% for message in messages %}
+                  <li>
+                    <p class="text-success">
+                      {{ message }}
+                    </p>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          {% endwith %}
           {% block content %}{% endblock %}
         </div>
       </div><!-- /content -->
@@ -34,5 +47,13 @@
       </div>
 
     </div><!-- /page -->
+
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $('.tt').tooltip();
+      });
+    </script>
+
   </body>
 </html>

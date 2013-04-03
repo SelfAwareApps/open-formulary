@@ -1,0 +1,67 @@
+{% extends 'base.jinja2' %}
+{% block title %}New Formulary{% endblock %}
+
+{% block extrascripts %}
+  <script type="text/javascript" src="/static/js/create.js"></script>
+{% endblock %}
+
+{% block content %}
+  {% set active = 'create' %}
+  {% include 'tabs.jinja2' %}
+
+  <form method="POST" id="create-form" action="">
+    <fieldset>
+
+      {% include 'formulary.metadata.form.jinja2' %}
+      <div class="row-fluid">
+        <div class="span12">
+          <h3>Drug details</h3>
+          <p>
+            Select the drugs that you want in your formulary.
+            Don't worry if you don't get all of them right now, you can always
+            edit the formulary later on.
+          </p>
+        </div>
+      </div>
+
+
+  {% for paragraph in paras %}
+    {% if paragraph['drugs']|length > 0 %}
+      <div class="row-fluid">
+        <h3 class="drugsect">
+          <i class="icon-chevron-right"></i>
+          {{ paragraph['title'] }}
+        </h3>
+        <h4 class="red">
+          {{ chapters[paragraph['chapter']] }} -
+          {{ sections[paragraph['chapter']][paragraph['section']] }}
+        </h4>
+
+        <div class="span12">
+<!--        <div class="span12 collapsed">-->
+          <ul class="druglist unstyled">
+            {% for drug in paragraph['drugs'] %}
+              <li id="{{ drug['code'] }}">
+                <input type="checkbox" name="{{drug['code']}}" value="" />
+                {{ drug['name'] }} ( {{ drug['code'] }} )
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    {% endif %}
+  {% endfor %}
+
+  <div class="row-fluid">
+    <div class="span12">
+      <p>All done? hit the save button below to see your formulary in action</p>
+      <button type="submit" class="btn" tabindex="4">Submit</button>
+    </div>
+  </div>
+
+
+    </fieldset>
+  </form>
+
+
+{% endblock %}

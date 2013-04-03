@@ -2,21 +2,72 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-  {% set active = 'home'b %}
+  {% set active = 'home' %}
   {% include 'tabs.jinja2' %}
 
-<div class="row-fluid">
-  {% if formularies.count() > 0 %}
-    {% for form in formularies %}
-      <p>{{form}}</p>
-    {% endfor %}
-  {% else %}
-    <p>
-      Looks like you haven't created any formularies yet...
-    </p>
-    <p>
-      You should try <a href="{{ url_for('views.create') }}">creating one</a>
-    </p>
+  {% if formularies.count() == 0 %}
+    <div class="row-fluid">
+      <p>
+        Looks like you haven't created any formularies yet...
+      </p>
+      <p>
+        You should try <a href="{{ url_for('views.formulary_create') }}">creating one</a>
+      </p>
+    </div>
   {% endif %}
-</div>
+
+  {% if formularies.count() > 0 %}
+  <h3 class="red">
+    Your Formularies
+  </h3>
+  {% endif %}
+  {% for form in formularies %}
+    <div class="row-fluid">
+      <div class="span6">
+        {% set formid = form['_id'].__str__() %}
+        <h2>
+          <a href="{{ url_for('views.formulary_detail', formid=formid) }}">
+            {{ form['name'] }}
+          </a>
+          <a href="{{ url_for('views.formulary_edit', formid=formid) }}"
+             class="right lm10">
+            <i class="icon-edit"></i>
+          </a>
+          <a href="{{ url_for('views.formulary_delete', formid=formid) }}"
+             class="right lm10">
+             <i class="icon-remove-sign red"></i>
+          </a>
+        </h2>
+      </div>
+      <div class="span6 hidden-phone">
+        <p class="">
+          {{form['description'] }}
+        </p>
+      </div>
+    </div>
+  {% endfor %}
+
+  {% if following.count() > 0 %}
+  <h3 class="red">
+    formularies you're following
+  </h3>
+  {% endif %}
+  {% for form in following %}
+    <div class="row-fluid">
+      <div class="span6">
+        {% set formid = form['_id'].__str__() %}
+        <h2>
+          <a href="{{ url_for('views.formulary_detail', formid=formid) }}">
+            {{ form['name'] }}
+          </a>
+        </h2>
+      </div>
+      <div class="span6 hero-unit hidden-phone">
+        <p class="">
+          {{form['description'] }}
+        </p>
+      </div>
+    </div>
+  {% endfor %}
+
 {% endblock %}

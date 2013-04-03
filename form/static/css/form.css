@@ -6,6 +6,19 @@ body {
     margin-bottom:0;
 }
 
+@media (max-width: 480px) {
+
+    body {
+        padding: 0px;
+    }
+
+}
+
+a:hover{
+    text-decoration: none;
+}
+
+
 .container {
     width: auto;
     margin: 0px 10px;
@@ -24,13 +37,30 @@ body {
     margin-bottom: 12px;
 }
 
+/* Utility classes */
+
+.red {
+    color: #c55050;
+}
+
+.blue {
+    color: #3168be;
+}
+
+.right {
+    float: right;
+}
+
+.lm10 {
+    margin-left: 10px;
+}
+
+div.span12.collapsed {
+    display: none;
+}
+
 /* Header */
 body #header {
-    position:fixed;
-    top:0;
-    left:0;
-    right:0;
-    padding:0;
     border-top:solid 20px #3168be;
     z-index:100;
     background:#fff;
@@ -49,9 +79,7 @@ body #header {
 }
 
 #header h1 img {
-    position:absolute;
-    top:11px;
-    right:10px;
+    float: right;
 }
 
 #header a {
@@ -64,7 +92,6 @@ body #header {
 ul.nav.nav-tabs li.active a {
     background: #3168be;
     color: #eee;
-    text-shadow: none;
 }
 
 ul.nav.nav-tabs li a{
@@ -74,62 +101,36 @@ ul.nav.nav-tabs li a{
 ul.nav.nav-tabs li a:hover{
     background: #c55050;
     color: #fff;
-    text-shadow: none;
 }
 
 /* Body content */
 #content {
-    margin-top: 20px;
-    padding: 70px 0px 100px 0px;
-    text-shadow: 1px 1px 0px #fff;
     background:#fff;
     width: auto;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 10px 0px 0px;
+
 }
 
-ul.druglist {
-    height: 400px;
-    overflow: scroll
+h3.drugsect i {
+    color: #3168be;
+}
+
+h3.drugsect:hover {
+    cursor: pointer;
+}
+
+h3.drugsect:hover i {
+    color: #c55050;
 }
 
 /* Footer */
 #warning {
     background:#c55050; color:#fff; text-align:center; padding:5px;
     /* position:absolute; bottom:-11px;  */
-    left:0; right:0;text-shadow:none;z-index:2000000001;
+    left:0; right:0;
+    text-shadow:none;
+    z-index:2000000001;
 }
 #warning a {white-space:nowrap;}
 #warning a {color:#fff;}
-
-
-
-
-
-/* .welcome {font-size:1.4em; padding-left:8px;} */
-
-/* .list {padding:0; margin:0;} */
-/* .list a {display:block;} */
-/* .list li {list-style-type:none;padding:0.5em 0; margin:0; border-bottom:solid 1px #000;} */
-
-/* .ui-bar-a {text-shadow: none;} */
-
-/* .hidden p {display:block} */
-/* @media screen and (min-width: 42em){ */
-/*     /\* UX styling for desktop *\/ */
-/*     .hidden p {display:block} */
-/*     .drug p {width: 700px; padding: 0em;} */
-/*     #content .interaction{padding: 0em;} */
-/* } */
-
-/* #search {position:relative;} */
-/* #search input[type="text"]{margin-bottom:0.3em;} */
-/* #search input[type="submit"]{border:solid 1px #808080; background-color:#808080;color:#fff;} */
-
-/* /\* JQuery Autocomplete *\/ */
-/* .ui-menu-item { */
-/*   list-style-type: none; */
-/* } */
-/* /\* JQuery Autocomplete End *\/ */
-
-/* .drug h1 {font-size:50px; font-weight:normal; margin-bottom:5px;} */
-/* .drug h2 {border-top:solid 2px #323232;  padding-top:12px; cursor:pointer; text-transform:uppercase; font-size:13px;} */
-/* .drug {background:#fff;margin:0 8px;} */
