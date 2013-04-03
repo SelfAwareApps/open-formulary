@@ -16,6 +16,6 @@ app = Flask(__name__)
 app.debug = True
 app.session_interface = MongoSessionInterface(db)
 app.register_blueprint(views.blue)
-app.register_blueprint(users.api)
-users.setup(app)
+app.register_blueprint(users.views)
+users.setup(app, users.OFUser)
 csrf(app)

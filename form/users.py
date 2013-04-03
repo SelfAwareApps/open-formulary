@@ -10,60 +10,54 @@ from flask import (Blueprint, request, redirect, session, current_app,
 from lxml import etree
 import requests
 
-import pycas, settings
+import models, pycas, settings
 from db import db
 
-api = Blueprint('users', __name__)
+__all__ = [
+    'views',
+    'User',
+    'login_required',
+    'setup',
+    'OFUser'
+]
 
+views = Blueprint('users.views', __name__)
+ActiveUserKlass = None
 
-class User(object):
+class User(models.MongModel):
     """
     Our User class for use with the Flask Login extension
     and other helpful stuffs!
     """
+    collection = db.users
 
-    def __init__(self, document=None, authenticated=False):
-        self.document      = document
-        self._is_auth      = authenticated
-        return
+    username = models.CharField()
+    userid   = models.CharField(key='_id')
+
+    def __init__(self, authenticated=False, **kwargs):
+        """
+        Pluck authentication details from the Mongo Model args
+
+        Arguments:
+        - `authenticated`: bool - whether this User is authenticated
+        - `**kwargs`: dict
+
+        Return: None
+        Exceptions: None
+        """
+        self._authenticated = authenticated
+        super(User, self).__init__(**kwargs)
+
 
     def __str__(self):
         username, klass = '', 'AnonymousUser'
-        if self.is_authenticated:
+        if self.authenticated:
             klass = 'User'
             username = self.document['username']
         return '<{klass} {username}>'.format(klass=klass, username=username)
 
-    @staticmethod
-    def get_or_create(username, authenticated=False):
-        """
-        Given a username, return an instantiated User object.
-
-        If the user was not previously in the database, create
-        them now.
-        """
-        print 'Get or create for', username, authenticated
-        document = db.users.find_one({'username': username})
-        if document is not None:
-            return User(document=document, authenticated=authenticated)
-
-        userdoc = dict(username=username)
-        userid = db.users.insert(userdoc)
-        userdoc['_id'] = userid
-        return User(document=userdoc, authenticated=authenticated)
-
-    @staticmethod
-    def from_userid(userid, authenticated=False):
-        """
-        Given the unicode ID of a user, return the user object. or None
-        """
-        document = db.users.find_one({'_id': ObjectId(userid)})
-        if document is None:
-            return None
-        return User(document=document, authenticated=authenticated)
-
-    @staticmethod
-    def authenticate(ticket=None, service=None):
+    @classmethod
+    def authenticate(klass, ticket=None, service=None):
         """
         Ask our CAS server whether this user is authenticated please.
 
@@ -81,25 +75,7 @@ class User(object):
             return
         username = root.find('authenticationSuccess/user').text
         print username, 'Authenticated with CAS'
-        return User.get_or_create(username, authenticated=True)
-
-    @property
-    def userid(self):
-        """
-        Return a unicode version of this user's ID.
-        """
-        if self.document is None:
-            return None
-        return unicode(self.document['_id'])
-
-    @property
-    def username(self):
-        """
-        Return a unicode version of this user's username.
-        """
-        if self.document is None:
-            return None
-        return unicode(self.document['username'])
+        return klass.get_or_create(username=username, authenticated=True)
 
     @property
     def is_authenticated(self):
@@ -107,36 +83,8 @@ class User(object):
         Predicate function to determine whether this user is
         logged in or not.
         """
-        return self._is_auth
+        return self._authenticated
 
-    @property
-    def is_active(self):
-        """
-        Predicate function to determine whether we have suspended
-        this user for some reason?
-
-        (Currently no use case for this, just an Interface reqiurement)
-        """
-        return True
-
-    @property
-    def is_anonymous(self):
-        """
-        Predicate function to determine whether this user is anonymous.
-        """
-        if self.document is None:
-            return True
-        return False
-
-    def save(self):
-        """
-        Save the current User document
-
-        Return: Bool
-        Exceptions: None
-        """
-        db.users.save(self.document)
-        return True
 
 
 
@@ -165,21 +113,22 @@ def load_user():
     context = _request_ctx_stack.top
     if request.path.startswith(current_app.static_url_path):
         # load up an anonymous user for static pages
-        request.user = User()
+        request.user = ActiveUserKlass()
         return
-    if 'user_id' not in session:
-        request.user = User()
+    if 'user_id' not in session: # Then we're anonymous
+        request.user = ActiveUserKlass()
         return
-    user = User.from_userid(session['user_id'], authenticated=True)
+    user = ActiveUserKlass.get(session['user_id'])
     if user is not None:
+        user._authenticated = True
         request.user = user
         return
     logout_user()
-    request.user = User()
+    request.user = ActiveUserKlass()
     return
 
 
-@api.route('/login')
+@views.route('/login')
 def login():
     """
     Log our user in
@@ -190,7 +139,7 @@ def login():
     if ticket is None:
         return redirect(cas_url)
 
-    user = User.authenticate(ticket=ticket, service=request.url)
+    user = ActiveUserKlass.authenticate(ticket=ticket, service=request.url)
     if user is None:
         return redirect(cas_url)
 
@@ -199,7 +148,7 @@ def login():
         return redirect(next_page)
     return redirect('/')
 
-@api.route('/logout')
+@views.route('/logout')
 def logout():
     """
     Log our user out
@@ -241,8 +190,19 @@ def login_required(fn):
 
 
 
-def setup(app):
+def setup(app, userklass=User):
     """
     Set up the authentication
     """
     app.before_request(load_user)
+    global ActiveUserKlass
+    ActiveUserKlass = userklass
+
+
+class OFUser(User):
+    """
+    Extra User attributes as required by the Open Formulary application
+    """
+    collection = db.users
+
+    following = models.ListField(default=[])

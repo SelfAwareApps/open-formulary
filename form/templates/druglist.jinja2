@@ -1,0 +1,12 @@
+<ul class="druglist unstyled collapsed">
+  {% for drug in druglist %}
+    <li id="{{ drug['code'] }}">
+      <input type="checkbox" name="{{drug['code']}}" value=""
+             {% if paragraph is defined %}
+               {% if paragraph['chapter'] in formulary['codes'] and drug['code'] in formulary['codes'][paragraph['chapter']][paragraph['section']] %}checked="true"{% endif %}
+             {% endif %}
+             />
+      {{ drug['name'] }} ( {{ drug['code'] }} )
+    </li>
+  {% endfor %}
+</ul>

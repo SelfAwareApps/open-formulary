@@ -4,12 +4,11 @@ $(document).ready( function(){
         $h3 = $(this);
         $h3.children('i').toggleClass('icon-chevron-right').toggleClass('icon-chevron-down');
         window.h3 = $h3;
-        $druglist = $h3.siblings('div');
+        $druglist = $h3.next('ul');
         if($druglist.is(':visible')){
             $druglist.slideUp();
         }else{
             $druglist.slideDown();
         }
-        $h3.next('div')
     });
 });

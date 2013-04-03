@@ -24,33 +24,7 @@
         </div>
       </div>
 
-
-  {% for paragraph in paras %}
-    {% if paragraph['drugs']|length > 0 %}
-      <div class="row-fluid">
-        <h3 class="drugsect">
-          <i class="icon-chevron-right"></i>
-          {{ paragraph['title'] }}
-        </h3>
-        <h4 class="red">
-          {{ chapters[paragraph['chapter']] }} -
-          {{ sections[paragraph['chapter']][paragraph['section']] }}
-        </h4>
-
-        <div class="span12">
-<!--        <div class="span12 collapsed">-->
-          <ul class="druglist unstyled">
-            {% for drug in paragraph['drugs'] %}
-              <li id="{{ drug['code'] }}">
-                <input type="checkbox" name="{{drug['code']}}" value="" />
-                {{ drug['name'] }} ( {{ drug['code'] }} )
-              </li>
-            {% endfor %}
-          </ul>
-        </div>
-      </div>
-    {% endif %}
-  {% endfor %}
+      {% include 'bnf.walk.jinja2' %}
 
   <div class="row-fluid">
     <div class="span12">

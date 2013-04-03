@@ -55,7 +55,7 @@ a:hover{
     margin-left: 10px;
 }
 
-div.span12.collapsed {
+.collapsed {
     display: none;
 }
 
