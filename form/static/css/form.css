@@ -88,6 +88,11 @@ body #header {
     font-weight:normal!important;
 }
 
+#username {
+    float: right;
+    margin-right: 10px;
+}
+
 /* Tabs */
 ul.nav.nav-tabs li.active a {
     background: #3168be;

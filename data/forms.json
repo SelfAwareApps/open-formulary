@@ -1,0 +1,267 @@
+[
+  {
+    "codes": {
+      "10": {
+        "01": [
+          "1001030T0AAAAAA", 
+          "1001030U0AAABAB", 
+          "1001030S0AAAAAA", 
+          "1001030U0AAACAC"
+        ]
+      }, 
+      "01": {
+        "03": [
+          "0103050L0AAAHAH", 
+          "0103050P0AABGBG", 
+          "0103010T0AAAJAJ", 
+          "0103050R0AAACAC", 
+          "0103010T0AAADAD", 
+          "0103010D0AAABAB", 
+          "0103050P0AAAFAF", 
+          "0103050L0AAABAB", 
+          "0103030S0AAAAAA", 
+          "0103010T0AABKBK", 
+          "0103050E0AAAFAF", 
+          "0103010T0AAAPAP", 
+          "0103010T0AAACAC", 
+          "0103050P0AAAAAA", 
+          "0103010D0AAAAAA", 
+          "0103050P0AAAEAE", 
+          "0103010D0AAACAC", 
+          "0103010T0AAAIAI", 
+          "0103050L0AAAGAG", 
+          "0103050L0AAAAAA", 
+          "0103040M0AAAAAA", 
+          "0103050E0AAAGAG", 
+          "0103010T0AAAAAA"
+        ], 
+        "01": [
+          "0101021B0BIAAAH", 
+          "0101010R0BCAAAB", 
+          "0101021B0BHAAAI", 
+          "0101021B0BEAIAL", 
+          "0101021B0BEAKAQ", 
+          "0101021B0BIABAH", 
+          "0101010G0AAABAB", 
+          "0101010J0AAAAAA"
+        ], 
+        "04": [
+          "0104020L0AAAAAA", 
+          "0104020H0AAAAAA"
+        ], 
+        "05": [
+          "0105010D0AAABAB", 
+          "0105010B0BBACAB", 
+          "0105020A0AAACAC", 
+          "0105010B0BHAAAR", 
+          "0105020A0AAABAB", 
+          "0105020B0AAAAAA", 
+          "0105010B0BGABAA", 
+          "0105010B0AAAAAA", 
+          "0105010B0BBADAG", 
+          "0105020G0AAAAAA"
+        ]
+      }, 
+      "04": {
+        "07": [
+          "0407020C0AAAFAF", 
+          "0407020C0AAADAD", 
+          "0407020C0AAAEAE"
+        ]
+      }, 
+      "05": {
+        "01": [
+          "0501110C0AABHBH", 
+          "0501050C0AAAKAK", 
+          "0501110C0AAAJAJ", 
+          "0501050B0AAAAAA", 
+          "0501050C0AAABAB", 
+          "0501050H0AAACAC", 
+          "0501013B0AAABAB", 
+          "0501050H0AAAAAA", 
+          "0501050N0AAAAAA", 
+          "0501050N0AAABAB", 
+          "0501050H0AAAMAM", 
+          "0501050B0AAADAD", 
+          "0501050B0AAAEAE", 
+          "0501050H0AAAEAE", 
+          "0501110C0AAAIAI", 
+          "0501050H0AAABAB", 
+          "0501013B0AAAAAA", 
+          "0501050H0AAANAN", 
+          "0501050H0AAALAL"
+        ]
+      }, 
+      "08": {
+        "02": [
+          "0802020T0BEABAA", 
+          "0802020T0BEAAAB", 
+          "0802010G0AAADAD", 
+          "0802020T0BEACAF"
+        ]
+      }, 
+      "09": {
+        "02": [
+          "0902012H0BCAGAD", 
+          "0902012H0BBAGAE", 
+          "0902012H0BCAEAD", 
+          "0902012H0BBAFAE", 
+          "0902012H0BCADAD", 
+          "0902012H0BCAAAD", 
+          "0902012H0BCACAD", 
+          "0902012H0BBAEAE", 
+          "0902012H0BWAAA0"
+        ]
+      }
+    }, 
+    "name": "Lambeth CCG Formulary (Subset)", 
+    "owner": "david@openhealthcare.org.uk", 
+    "public": true, 
+    "description": "This is the medicines formulary for Lambeth CCG as specified here: http://www.lambethccg.nhs.uk/YourHealth/InfoForPatients/Pages/Formularies.aspx"
+  }, 
+  {
+    "codes": {
+      "02": {
+        "04": [
+          "0204000R0AAAHAH", 
+          "0204000R0AAAKAK", 
+          "0204000R0AACYCY", 
+          "0204000R0AAAAAA", 
+          "0204000R0AAAJAJ", 
+          "0204000R0AAABAB"
+        ]
+      }, 
+      "04": {
+        "02": [
+          "040201030AAALAL", 
+          "040201030AAAAAA", 
+          "040201030AAAKAK", 
+          "040201030AAADAD", 
+          "040201030AAAEAE", 
+          "040201030AAABAB", 
+          "040201030AAACAC"
+        ], 
+        "03": [
+          "0403030E0AAAHAH", 
+          "0403040X0AAAAAA", 
+          "0403040W0AAAMAM", 
+          "0403030Q0AAABAB", 
+          "0403030E0AAAEAE", 
+          "0403040X0AAAMAM", 
+          "0403030Z0AAAAAA", 
+          "0403010X0AAAFAF", 
+          "0403010X0AAADAD", 
+          "0403030E0AAACAC", 
+          "0403010R0AAAGAG", 
+          "0403040W0AAABAB", 
+          "0403040W0AAAAAA", 
+          "0403030E0AAAAAA", 
+          "0403030Q0AAAQAQ", 
+          "0403010X0AAABAB", 
+          "0403040W0AAADAD", 
+          "0403010R0AAALAL", 
+          "0403030D0AAAAAA", 
+          "0403030E0AAAJAJ", 
+          "0403040X0AAAGAG", 
+          "0403030D0AAACAC", 
+          "0403040W0AAAJAJ", 
+          "0403040X0AAALAL", 
+          "0403040W0AAALAL", 
+          "0403030Q0AAAAAA", 
+          "0403040X0AAANAN", 
+          "0403010X0AAAAAA", 
+          "0403030D0AAABAB", 
+          "0403040X0AAAJAJ", 
+          "0403040W0AAAEAE", 
+          "0403040X0AAAPAP", 
+          "0403040W0AAAKAK"
+        ], 
+        "01": [
+          "0401020K0AAA1A1", 
+          "0401020K0AABWBW", 
+          "0401020K0AABQBQ", 
+          "0401020K0BLACBQ", 
+          "0401020K0AABMBM", 
+          "0401020K0AAA6A6", 
+          "0401020K0BLAAAD", 
+          "0401020K0AAAIAI", 
+          "0401020K0AAAWAW", 
+          "0401020K0AAADAD", 
+          "0401010T0AAAEAE", 
+          "0401010Z0AAACAC", 
+          "0401010Z0AAAAAA", 
+          "0401020K0AAAQAQ", 
+          "0401010Z0AAAKAK", 
+          "0401020K0AAACAC", 
+          "0401010T0AAAMAM", 
+          "0401020K0AAAEAE", 
+          "0401020K0AABNBN", 
+          "0401010Z0AAAJAJ", 
+          "0401010T0AAANAN", 
+          "0401020K0AABBBB", 
+          "0401020K0AACBCB", 
+          "0401010Z0AAAFAF", 
+          "0401020K0AAAHAH", 
+          "0401020K0AAAJAJ", 
+          "0401020K0BLABAE"
+        ], 
+        "06": [
+          "0406000T0AAAKAK", 
+          "0406000B0AAABAB", 
+          "0406000U0AAABAB", 
+          "0406000J0AAACAC", 
+          "0406000J0AAAJAJ", 
+          "0406000T0AAAGAG", 
+          "0406000B0AAAAAA", 
+          "0406000U0AAAAAA", 
+          "0406000B0AAADAD"
+        ], 
+        "07": [
+          "0407010F0AAAKAK", 
+          "0407010H0AAAAAA", 
+          "0407020ADAAAIAI", 
+          "0407041T0AAAFAF", 
+          "0407041T0AAACAC", 
+          "0407020Q0AAABAB", 
+          "0407020C0AAAFAF", 
+          "0407010F0AAAAAA", 
+          "0407020C0AAADAD", 
+          "0407020A0AAAJAJ", 
+          "0407020ADAAAFAF", 
+          "0407010F0AAABAB", 
+          "0407010F0AAAFAF", 
+          "0407010H0AAAQAQ", 
+          "0407010F0AAADAD", 
+          "0407010H0AAAMAM", 
+          "0407020C0AAABAB", 
+          "0407010H0AAACAC", 
+          "0407020ADAAAHAH", 
+          "0407020ADAAAGAG", 
+          "0407010H0AAAWAW", 
+          "0407020ADAAAAAA", 
+          "0407020Q0AACNCN", 
+          "0407020ADAAALAL", 
+          "0407020AFAAADAD", 
+          "0407020A0AAAIAI", 
+          "0407020C0AAAEAE", 
+          "0407010F0AAACAC", 
+          "0407020A0AAAHAH", 
+          "0407010H0AAA7A7", 
+          "0407020A0AAAZAZ", 
+          "0407030ADAAAAAA", 
+          "0407020ADAAACAC", 
+          "0407010F0AAAHAH", 
+          "0407010H0AABGBG", 
+          "0407020Q0AACPCP"
+        ], 
+        "05": [
+          "0405010P0AAAAAA"
+        ]
+      }
+    }, 
+    "name": "Shropshire CCG Formulary", 
+    "owner": "david@openhealthcare.org.uk", 
+    "public": true, 
+    "description": "This is a subset of the Shropshire CCG formulary for Central Nervous System drugs."
+  }
+]

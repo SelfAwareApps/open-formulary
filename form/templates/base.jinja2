@@ -16,9 +16,11 @@
           <a href="/">Open Formulary</a>
           <img src="/static/img/logo2.png" height="37" width="41"/>
         </h1>
+        <p id="username">{{ request.user.username }}</p>
       </div><!-- /header -->
 
       <div id="content">
+
         <div class="container">
           {% with messages = get_flashed_messages() %}
             {% if messages %}
