@@ -112,8 +112,9 @@ class MongModel(object):
         if document is None:
             userid = klass.collection.insert(kwargs)
             doc['_id'] = userid
+        else:
+            doc.update(document)
 
-        doc.update(document)
         print 'get or create', doc
         return klass(**doc)
 
