@@ -31,8 +31,9 @@ class User(models.MongModel):
     """
     collection = db.users
 
-    username = models.CharField()
-    userid   = models.CharField(key='_id')
+    username  = models.CharField()
+    userid    = models.CharField(key='_id')
+    following = models.ListField()
 
     def __init__(self, authenticated=False, **kwargs):
         """

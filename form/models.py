@@ -92,7 +92,10 @@ class MongModel(object):
         Return: dict or None
         Exceptions: None
         """
-        return klass(**klass.collection.find_one({'_id': ObjectId(instanceid)}))
+        params = klass.collection.find_one({'_id': ObjectId(instanceid)})
+        if params is not None:
+            return klass(**params)
+        return None
 
     @classmethod
     def get_or_create(klass, **kwargs):

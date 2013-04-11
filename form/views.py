@@ -28,7 +28,7 @@ def index():
                                popular=popular)
 
     formularies = db.formularies.find({'owner': request.user.username})
-    following_ids = request.user.document.get('following', [])
+    following_ids = request.user.following
     following = db.formularies.find({'_id': {'$in': [ObjectId(i) for i in following_ids]}})
     return render_template('index.jinja2',
                            formularies=formularies,
