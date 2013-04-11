@@ -67,11 +67,13 @@
                 <tr>
                   <th>BNF Code</th>
                   <th>Name</th>
+                  <th>Elsewhere</th>
                 </tr>
                 {% for code in formulary['codes'][chapter][section] %}
                   <tr>
                     <td>{{ drugs[code]['code'] }}</td>
                     <td>{{ drugs[code]['name'] }}</td>
+                    <td> <a href="http://openbnf.org/search?q={{ drugs[code]['name'] }}">Open BNF</a></td>
                   </tr>
                 {% endfor %}
               </table>

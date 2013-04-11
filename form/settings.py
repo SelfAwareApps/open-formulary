@@ -4,7 +4,7 @@ Settings for OPENBNF
 import os
 import urlparse
 
-DB = 'openbnf'
+DB = 'openformulary'
 DB_HOST = 'localhost'
 DB_PORT = 27017
 DB_USER = None
