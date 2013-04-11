@@ -16,7 +16,9 @@
           <a href="/">Open Formulary</a>
           <img src="/static/img/logo2.png" height="37" width="41"/>
         </h1>
-        <p id="username">{{ request.user.username }}</p>
+        {% if request.user.is_authenticated %}
+          <p id="username">{{ request.user.username }}</p>
+        {% endif %}
       </div><!-- /header -->
 
       <div id="content">
