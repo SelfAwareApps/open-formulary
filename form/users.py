@@ -32,7 +32,6 @@ class User(models.MongModel):
     collection = db.users
 
     username  = models.CharField()
-    userid    = models.CharField(key='_id')
     following = models.ListField()
 
     def __init__(self, authenticated=False, **kwargs):
@@ -52,9 +51,9 @@ class User(models.MongModel):
 
     def __str__(self):
         username, klass = '', 'AnonymousUser'
-        if self.authenticated:
+        if self.is_authenticated:
             klass = 'User'
-            username = self.document['username']
+            username = self._document['username']
         return '<{klass} {username}>'.format(klass=klass, username=username)
 
     @classmethod
@@ -76,7 +75,9 @@ class User(models.MongModel):
             return
         username = root.find('authenticationSuccess/user').text
         print username, 'Authenticated with CAS'
-        return klass.get_or_create(username=username, authenticated=True)
+        goc = klass.get_or_create(username=username, authenticated=True)
+        print goc
+        return goc
 
     @property
     def is_authenticated(self):
@@ -86,6 +87,18 @@ class User(models.MongModel):
         """
         return self._authenticated
 
+    @property
+    def userid(self):
+        """
+        Unicode userid
+
+        Return: str
+        Exceptions: None
+        """
+        uid = self._document.get('_id', None)
+        if uid:
+            uid = unicode(uid)
+        return uid
 
 
 
@@ -93,6 +106,7 @@ def login_user(user):
     """
     Log in USER
     """
+    print 'login user', user, user.userid, user._document
     session['user_id'] = user.userid
     return True
 
@@ -144,7 +158,10 @@ def login():
     if user is None:
         return redirect(cas_url)
 
+    print user._document
+    print session
     login_succ = login_user(user)
+    print session
     if next_page:
         return redirect(next_page)
     return redirect('/')

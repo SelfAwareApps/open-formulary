@@ -39,7 +39,8 @@ class BoolField(Field):
     pass
 
 class ListField(Field):
-    pass
+    def __init__(self, default=[], key=None):
+        super(ListField, self).__init__(default=default, key=key)
 
 class IntField(Field):
     pass
@@ -106,12 +107,14 @@ class MongModel(object):
         them now.
         """
         document = klass.collection.find_one(kwargs)
-        if document is not None:
-            return klass(**kwargs)
-
-        userid = klass.collection.insert(kwargs)
         doc = kwargs.copy()
-        doc['_id'] = userid
+
+        if document is None:
+            userid = klass.collection.insert(kwargs)
+            doc['_id'] = userid
+
+        doc.update(document)
+        print 'get or create', doc
         return klass(**doc)
 
     def save(self):
@@ -141,7 +144,7 @@ class Formulary(MongModel):
     public          = BoolField(default=True)
     owner           = CharField()
     codes           = ListField()
-    following_count = IntField()
+    following_count = IntField(default=0)
 
     def __str__(self):
         return '<Formulary {0} ({1})>'.format(self.name, self.owner)
